@@ -4,7 +4,7 @@ const router = express.Router();
 import date from "date-and-time";
 import addTodoModel from "../../models/addTodoModel.js";
 
-const now = new Date();
+const now =new Date();
 const dateTime = date.format(now, "ddd, MMM DD YYYY");
 
 router.post("/addTodo", async (req, res) => {

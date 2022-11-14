@@ -16,15 +16,15 @@ router.post("/addTodo", async (req, res) => {
         description: "description required",
       });
     }
-    const newsData = new addTodoModel({
+    const userData = new addTodoModel({
       taskName: bodyData.taskName,
       description: bodyData.description,
       status: "Todo",
       createdAt: dateTime,
       updatedAt: dateTime,
     });
-    newsData.save();
-    res.send(`Todo ${bodyData.taskName} addedd`);
+    userData.save();
+    res.send(userData);
   } catch (err) {
     res.send(err);
   }

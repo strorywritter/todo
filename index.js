@@ -10,6 +10,7 @@ await connectDB();
 // user functions
 // import signup from './functions/user/signup.js'
 import addTodo from './functions/user/addTodo.js'
+import updateTodo from './functions/user/updateTodo.js'
 
 
 const app = express()
@@ -31,6 +32,9 @@ app.use(bodyParser.json())
 
 // addTodo
 app.use('/user',addTodo)
+
+// updateTodo
+app.use('/user',updateTodo)
 
 
 app.get('/',(req,res)=>{

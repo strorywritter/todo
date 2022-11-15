@@ -3,9 +3,10 @@ import "dotenv/config";
 const router = express.Router();
 import addTodoModel from "../../models/addTodoModel.js";
 
-router.get("/getTodo", async (req, res) => {
+router.get("/getTodoByStatus", async (req, res) => {
   try {
-    const allTodos = await addTodoModel.find();
+    const status = req.query.status;
+    const allTodos = await addTodoModel.find({status:status});
     res.send(allTodos);
   } catch (err) {
     res.send(err);

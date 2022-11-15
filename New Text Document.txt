@@ -15,3 +15,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+import multiparty from 'multiparty'
+
+let form = new multiparty.Form();
+
+    form.parse(req, function(err, fields, files) {
+      const bodyData = fields
+      const filesData = files.testImage[0]
+      // console.log(bodyData)
+      console.log(filesData.path)
+   });

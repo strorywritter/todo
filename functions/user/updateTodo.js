@@ -10,7 +10,6 @@ const dateTime = date.format(now, "ddd, MMM DD YYYY");
 router.post("/updateTodo", async (req, res) => {
   try {
     const bodyData = req.body;
-    console.log(bodyData)
     if (!bodyData.status || !bodyData.todoId) {
       return res.status(422).json({
         status: "status is required",

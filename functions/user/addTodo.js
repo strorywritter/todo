@@ -16,7 +16,7 @@ const dateTime = date.format(now, "ddd, MMM DD YYYY");
 
 router.post("/addTodo", async (req, res) => {
   try {
-    const { taskName, description } = req.body;
+    const { taskName, description, email } = req.body;
     if (!taskName || !description) {
       return res.status(422).json({
         taskName: "taskName is required",
@@ -29,6 +29,7 @@ router.post("/addTodo", async (req, res) => {
       taskName: taskName,
       description: description,
       status: "Todo",
+      email: email,
       createdAt: dateTime,
       updatedAt: dateTime,
       file: upload.secure_url
@@ -36,6 +37,9 @@ router.post("/addTodo", async (req, res) => {
     await userData.save();
     res.send(userData);
   } catch (err) {
+    if (err.code == 11000){
+      res.send(`taske name "${req.body.taskName}" already used`)
+    }
     res.send(err);
   }
 });

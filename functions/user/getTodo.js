@@ -5,7 +5,8 @@ import addTodoModel from "../../models/addTodoModel.js";
 
 router.get("/getTodo", async (req, res) => {
   try {
-    const allTodos = await addTodoModel.find();
+    const status = req.query.email;
+    const allTodos = await addTodoModel.find({email:status});
     res.send(allTodos);
   } catch (err) {
     res.send(err);

@@ -3,6 +3,7 @@ import date from "date-and-time";
 import "dotenv/config";
 import express from "express";
 import addTodoModel from "../../models/addTodoModel.js";
+
 const router = express.Router();
 
 cloudinary.config({
@@ -38,6 +39,7 @@ router.post("/addTodo", async (req, res) => {
     res.send(userData);
   } catch (err) {
     if (err.code == 11000){
+      console.log(err)
       res.send(`taske name "${req.body.taskName}" already used`)
     }
     res.send(err);

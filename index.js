@@ -6,7 +6,7 @@ import 'dotenv/config'
 import connectDB from "./config/db.js";
 import multer from "multer"
 import cloudinary from "cloudinary"
-// import { auth } from "express-openid-connect"
+import { auth } from "express-openid-connect"
 
 const app = express()
 const PORT = 3000
@@ -28,16 +28,16 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
-// app.use(
-//   auth({
-//     // authRequired: false,
-//     auth0Logout: true,
-//     issuerBaseURL: process.env.ISSUER_BASE_URL,
-//     baseURL: process.env.BASE_URL,
-//     clientID: process.env.CLIENT_ID,
-//     secret: process.env.SECRET,
-//   })
-// );
+app.use(
+  auth({
+    authRequired: true,
+    auth0Logout: true,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.CLIENT_ID,
+    secret: process.env.SECRET,
+  })
+);
 
 // user functions
 // import signup from './functions/user/signup.js'

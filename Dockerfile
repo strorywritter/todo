@@ -1,6 +1,6 @@
 FROM node:18-alpine as base
 
-# RUN npm install --global nodemon
+RUN npm install --global nodemon
 
 WORKDIR /usr/src/app
 

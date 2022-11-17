@@ -1,15 +1,21 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
-// import cors from 'cors'
+import cors from 'cors'
 import 'dotenv/config'
 import connectDB from "./config/db.js";
 import multer from "multer"
 import cloudinary from "cloudinary"
-import { auth } from "express-openid-connect"
+import middleware from './middleware/auth.js'
+
+// import { auth } from "express-openid-connect"
 
 const app = express()
 const PORT = 3000
+
+app.use(cors())
+
+app.use(middleware.decodeToken)
 
 await connectDB();
 
@@ -28,16 +34,16 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
-app.use(
-  auth({
-    authRequired: true,
-    auth0Logout: true,
-    issuerBaseURL: process.env.ISSUER_BASE_URL,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.CLIENT_ID,
-    secret: process.env.SECRET,
-  })
-);
+// app.use(
+//   auth({
+//     authRequired: true,
+//     auth0Logout: true,
+//     issuerBaseURL: process.env.ISSUER_BASE_URL,
+//     baseURL: process.env.BASE_URL,
+//     clientID: process.env.CLIENT_ID,
+//     secret: process.env.SECRET,
+//   })
+// );
 
 // user functions
 // import signup from './functions/user/signup.js'
@@ -47,17 +53,14 @@ import getTodoByDate from './functions/user/getTodoByDate.js'
 import getTodoByStatus from './functions/user/gatTodoByStatus.js'
 import getTodo from './functions/user/getTodo.js'
 
-
-
-
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept"
+//     );
+//     next();
+//   });
 
 app.use(bodyParser.json())
 
@@ -80,7 +83,7 @@ app.use('/user',getTodoByStatus)
 app.use('/user',getTodo)
 
 
-app.get('/',(req,res)=>{
+app.get('/users',(req,res)=>{
     console.log("main page")
     res.send('main page')
 })

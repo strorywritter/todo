@@ -33,8 +33,5 @@
     "supertest": "^6.3.1",
     "timestamp": "0.0.1",
     "uuid": "^9.0.0"
-  },
-  "devDependencies": {
-    "chai": "^4.3.7"
   }
 }

@@ -12,7 +12,7 @@ services:
     image: node-web-api
     build: .
     ports:
-      - "3000:3000"
+      - "4000:4000"
     networks:
       - mern-app
 

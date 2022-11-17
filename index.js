@@ -11,7 +11,7 @@ import middleware from './middleware/auth.js'
 // import { auth } from "express-openid-connect"
 
 const app = express()
-const PORT = 3000
+const PORT = 4000
 
 app.use(cors())
 

@@ -10,6 +10,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3001
+EXPOSE 4000
 
 CMD ["nodemon", "index.js"]

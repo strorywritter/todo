@@ -3,7 +3,7 @@ import "dotenv/config";
 const router = express.Router();
 import addTodoModel from "../../models/addTodoModel.js";
 
-router.get("/getTodo", getTodo, async (req, res) => {
+router.get("/getTodo", async (req, res) => {
   try {
     console.log(req.headers.authorization)
     const email = req.query.email;

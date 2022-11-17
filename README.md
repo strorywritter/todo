@@ -15,4 +15,4 @@ Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
 
 You can up the server with docker and run the application
 
-# Migrations for database included in 'dbMigrations' folder
+## Migrations for database included in 'dbMigrations' folder

@@ -24,6 +24,11 @@ router.post("/addTodo", async (req, res) => {
         description: "description required",
       });
     }
+    const checkAlreadyUsed = await addTodoModel.find({taskName:taskName});
+    if(checkAlreadyUsed.length!=0){
+      return
+    }
+
     const upload = await cloudinary.v2.uploader.upload(req.file.path,{ resource_type: "raw" });
     
     const userData = new addTodoModel({
@@ -35,8 +40,10 @@ router.post("/addTodo", async (req, res) => {
       updatedAt: dateTime,
       file: upload.secure_url
     });
+
     await userData.save();
     res.send(userData);
+    
   } catch (err) {
     if (err.code == 11000){
       console.log(err)

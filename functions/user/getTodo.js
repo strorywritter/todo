@@ -5,7 +5,6 @@ import addTodoModel from "../../models/addTodoModel.js";
 
 router.get("/getTodo", async (req, res) => {
   try {
-    console.log(req.headers.authorization)
     const email = req.query.email;
     const allTodos = await addTodoModel.find({email:email});
     res.send(allTodos);

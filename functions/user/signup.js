@@ -4,22 +4,28 @@ import firebaseAuth from '../../config/firebaseAuth.js'
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  const bodyData = req.body;
-  if (!bodyData['email'] || !bodyData['password']){
-    return res.status(422).json({
-      email:"email is required",
-      password: "password required"
-    })
-  }
-
-  const token = jwt.sign(
-    { user_id: user._id, email },
-    process.env.TOKEN_KEY,
-    {
-      expiresIn: "2h",
+  try{
+    const bodyData = req.body;
+    if (!bodyData['email'] || !bodyData['password']){
+      return res.status(422).json({
+        email:"email is required",
+        password: "password required"
+      })
     }
-  );
-  // save user token
-  user.token = token;
+  
+    const token = jwt.sign(
+      { user_id: user._id, email },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: "2h",
+      }
+    );
+    // save user token
+    user.token = token;
+  }
+  catch(e){
+    console.log(e)
+  }
+  
 });
 export default router;

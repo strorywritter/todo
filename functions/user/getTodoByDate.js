@@ -13,8 +13,10 @@ router.post("/getTodoByDate", async (req, res) => {
       });
     }
     const updateData = await addTodoModel.find({
+      createdAt: {
         $gte: (bodyData.startDate),
         $lt: (bodyData.endDate)
+      },
     });
     res.send(updateData);
   } catch (err) {
